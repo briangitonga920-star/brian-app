@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BRIAN APP</title>
+<style>
+*{box-sizing:border-box;font-family:Arial} body{margin:0;background:#0f0f0f;color:white}
+.login{max-width:360px;margin:30px auto;padding:25px;background:#1a1a1a;border-radius:15px;text-align:center}
+.logo{width:90px;height:90px;background:#ffcc00;border-radius:20px;margin:0 auto;display:flex;align-items:center;justify-content:center;font-size:55px;font-weight:900;color:black;position:relative}
+.logo span{font-size:14px;position:absolute;bottom:8px;right:10px;background:black;color:#ffcc00;padding:2px 5px;border-radius:5px}
+.logoSmall{width:40px;height:40px;background:#ffcc00;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:900;color:black}
+input{width:100%;padding:13px;margin:8px 0;border-radius:10px;border:none;background:#2a2a2a;color:white}
+button{width:100%;padding:13px;background:#ffcc00;border:none;border-radius:10px;font-weight:bold;cursor:pointer}
+.hidden{display:none}
+.top{padding:15px;display:flex;justify-content:space-between;align-items:center;background:#1a1a1a}
+.card{background:#1a1a1a;margin:12px;padding:16px;border-radius:14px}
+.big{font-size:28px;font-weight:bold;color:#ffcc00}
+.tag{background:#ffcc00;color:black;padding:4px 10px;border-radius:20px;font-size:12px;font-weight:bold}
+.activeTag{background:#25D366;color:white;padding:5px 12px;border-radius:20px;font-size:12px;font-weight:bold}
+.share{background:#25D366;color:white}
+.call{background:#007bff;color:white}
+.emailBtn{background:#ea4335;color:white}
+.tab{display:flex;gap:8px;padding:0 12px}
+.tab button{background:#2a2a2a;color:white}
+.tab button.active{background:#ffcc00;color:black}
+a{color:#ffcc00;text-decoration:none;font-size:13px;cursor:pointer}
+.linkBtn{background:none;color:#ffcc00;padding:5px;font-size:13px}
+.row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #2a2a2a}
+.progress{height:10px;background:#2a2a2a;border-radius:10px;overflow:hidden;margin:10px 0}
+.progress div{height:100%;background:#ffcc00;width:54%}
+</style>
+</head>
+<body>
+
+<div id="loginPage" class="login">
+<div class="logo">B<span>&lt;/&gt;</span></div>
+<h1 style="color:#ffcc00;margin:10px 0 0">BRIAN APP</h1>
+<p style="margin:5px 0 15px;color:#aaa">Web Developer | Meru</p>
+<input id="user" placeholder="Username - enter brian">
+<input id="pass" type="password" placeholder="Password">
+<button onclick="login()">LOGIN</button>
+<p><a onclick="showForgot()">Forgot Password?</a></p>
+<p id="err" style="color:red"></p>
+<p style="font-size:12px;color:#888">First time: brian / 1234<br>📞 0795900735<br>✉️ briangitonga920@gmail.com</p>
+</div>
+
+<div id="forgotPage" class="login hidden">
+<div class="logo">B<span>&lt;/&gt;</span></div>
+<h2 style="color:#ffcc00">RESET PASSWORD</h2>
+<input id="fuser" placeholder="Username - enter brian">
+<input id="fnew" type="password" placeholder="New Password">
+<input id="fconfirm" type="password" placeholder="Confirm New Password">
+<button onclick="resetPass()">CHANGE PASSWORD</button>
+<button class="linkBtn" onclick="backToLogin()">← Back to Login</button>
+<p id="ferr" style="color:red"></p>
+<p id="fsuccess" style="color:#25D366"></p>
+</div>
+
+<div id="app" class="hidden">
+<div class="top">
+<div style="display:flex;gap:10px;align-items:center"><div class="logoSmall">B</div><b>BRIAN APP<br><small style="font-weight:normal;color:#aaa;font-size:11px">0795900735 | briangitonga920@gmail.com</small></b></div>
+<button onclick="logout()" style="width:auto;padding:8px 15px;background:red;color:white">Logout</button></div>
+<div class="tab">
+<button id="t1" class="active" onclick="show('p1','t1')">📊 Account Status</button>
+<button id="t2" onclick="show('p2','t2')">🌐 My Websites</button>
+<button id="t3" onclick="show('p3','t3')">📢 Market Me</button>
+</div>
+
+<div id="p1">
+<div class="card" style="text-align:center">
+<div class="logo" style="width:60px;height:60px;font-size:35px">B<span>&lt;/&gt;</span></div>
+<h2 style="margin:10px 0 5px">BRIAN GITONGA</h2>
+<p style="color:#aaa;margin:0">Web Developer | Meru</p><br>
+<span class="activeTag">● ACCOUNT ACTIVE</span><br><br>
+<div class="big">Ksh <span id="total">27,000</span></div>
+<small style="color:#aaa">Current Balance</small>
+<div class="progress"><div></div></div>
+<small>Goal: Ksh 50,000 - You are at 54%</small>
+</div>
+
+<div class="card">
+<h3>Account Details</h3>
+<div class="row"><span>Account Name</span><b>Brian Gitonga</b></div>
+<div class="row"><span>Location</span><b>Meru</b></div>
+<div class="row"><span>Phone</span><b>0795900735</b></div>
+<div class="row"><span>Email</span><b style="font-size:12px">briangitonga920@gmail.com</b></div>
+<div class="row"><span>Account Type</span><b>Developer Pro</b></div>
+<div class="row"><span>Member Since</span><b>2026</b></div>
+<div class="row"><span>Websites Built</span><b>2</b></div>
+<div class="row"><span>Total Earned</span><b style="color:#ffcc00">Ksh <span id="total2">27,000</span></b></div>
+<div class="row"><span>Status</span><b style="color:#25D366">● Verified</b></div>
+</div>
+
+<div class="card"><b>+ Add Payment Received</b><br><br>
+<input id="desc" placeholder="What job? Example: Hotel Website">
+<input id="amt" type="number" placeholder="How much? Example: 12000">
+<button onclick="addMoney()">ADD TO ACCOUNT</button></div>
+<div id="list"></div>
+</div>
+
+<div id="p2" class="hidden">
+<div class="card"><h3>1. SHERIKO MEDIA</h3><p>Media Services Website - Meru</p><span class="tag">Ksh 15,000</span><br><br><a href="https://briangitonga920-star.github.io/sheriko-media" target="_blank" style="color:white"><button>VIEW WEBSITE ↗</button></a></div>
+<div class="card"><h3>2. RED ROSE HOTEL</h3><p>Hotel Website - Booking + Menu</p><span class="tag">Ksh 12,000</span><br><br><a href="https://redrosehotel.co.ke" target="_blank" style="color:white"><button>VIEW WEBSITE ↗</button></a></div>
+</div>
+
+<div id="p3" class="hidden">
+<div class="card" style="text-align:center">
+<div class="logo" style="width:70px;height:70px;font-size:40px">B<span>&lt;/&gt;</span></div>
+<h2>BRIAN - Web Developer | Meru</h2><p>I built Sheriko Media & RedRose Hotel<br>Do you want me to build one like these for you?</p>
+<p style="font-size:18px;font-weight:bold;color:#ffcc00">📞 0795900735<br><span style="font-size:14px">✉️ briangitonga920@gmail.com</span></p>
+<a href="https://wa.me/254795900735?text=Hi%20Brian!%20I%20saw%20your%20work%20Sheriko%20Media%20and%20RedRose%20Hotel.%20I%20want%20a%20website!" target="_blank" style="color:white"><button class="share">CHAT WITH BRIAN ON WHATSAPP</button></a><br><br>
+<a href="tel:+254795900735" style="color:white"><button class="call">📞 CALL NOW</button></a><br><br>
+<a href="mailto:briangitonga920@gmail.com?subject=I%20Want%20A%20Website&body=Hi%20Brian,%20I%20saw%20your%20work." style="color:white"><button class="emailBtn">✉️ SEND EMAIL</button></a><br><br>
+<button onclick="share()">SHARE MY WORK TO STATUS</button></div>
+</div>
+</div>
+
+<script>
+let money = [{d:'Sheriko Media Website',a:15000},{d:'RedRose Hotel Website',a:12000}];
+if(!localStorage.getItem('brianPass')){ localStorage.setItem('brianPass','1234'); }
+function login(){ let u=document.getElementById('user').value; let p=document.getElementById('pass').value; let saved=localStorage.getItem('brianPass'); if(u=='brian' && p==saved){ document.getElementById('loginPage').classList.add('hidden'); document.getElementById('app').classList.remove('hidden'); render(); } else { document.getElementById('err').innerText='Wrong username or password!'; } }
+function showForgot(){ document.getElementById('loginPage').classList.add('hidden'); document.getElementById('forgotPage').classList.remove('hidden'); }
+function backToLogin(){ document.getElementById('forgotPage').classList.add('hidden'); document.getElementById('loginPage').classList.remove('hidden'); }
+function resetPass(){ let u=document.getElementById('fuser').value; let n=document.getElementById('fnew').value; let c=document.getElementById('fconfirm').value; if(u!='brian'){ document.getElementById('ferr').innerText='Wrong username!'; return; } if(n.length<4){ document.getElementById('ferr').innerText='Password must be at least 4 characters'; return; } if(n!=c){ document.getElementById('ferr').innerText='Passwords do not match!'; return; } localStorage.setItem('brianPass', n); document.getElementById('ferr').innerText=''; document.getElementById('fsuccess').innerText='✅ Password changed successfully!'; setTimeout(()=>{ backToLogin(); document.getElementById('pass').value=n; }, 1500); }
+function logout(){location.reload()}
+function show(p,t){['p1','p2','p3'].forEach(x=>document.getElementById(x).classList.add('hidden'));document.getElementById(p).classList.remove('hidden');['t1','t2','t3'].forEach(x=>document.getElementById(x).classList.remove('active'));document.getElementById(t).classList.add('active')}
+function render(){let s=0,h='';money.forEach(m=>{s+=m.a;h+=`<div class="card">✅ ${m.d} - <b style="color:#ffcc00">Ksh ${m.a.toLocaleString()}</b></div>`});document.getElementById('total').innerText=s.toLocaleString();document.getElementById('total2').innerText=s.toLocaleString();document.getElementById('list').innerHTML=h}
+function addMoney(){let d=document.getElementById('desc').value,a=parseInt(document.getElementById('amt').value);if(!d||!a)return alert('Fill both fields');money.push({d,a});render();alert('Payment added to your account!');}
+function share(){let txt='Hi! I am Brian - Web Developer in Meru 📞 0795900735 ✉️ briangitonga920@gmail.com. I built Sheriko Media (https://briangitonga920-star.github.io/sheriko-media) & RedRose Hotel (https://redrosehotel.co.ke). Do you want a website like these? Chat me!';window.open('https://wa.me/?text='+encodeURIComponent(txt))}
+</script>
+</body>
+</html>
